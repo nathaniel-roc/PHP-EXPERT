@@ -44,7 +44,7 @@ foreach($DataInfo as $info){
                 </tr>
             </tbody>
         </table>
-        <form action="superheros_edit.php" method="get">
+        <form action="superheros_edit.php<?php echo "?id=" . $id;?>" method="post">
             <p>type none om niks te veranderen</p>
             <p>ID: Kan niet worden veranderd</p>
             <p>Title: <input type="text" name="Title"></p>
@@ -59,78 +59,197 @@ foreach($DataInfo as $info){
             <p>PlaceOfDeath: <input type="text" name="PlaceOfDeath"></p>
             <p>Citizenship: <input type="text" name="Citizenship"></p>
             <p>Occupation: <input type="text" name="Occupation"></p>
+            <input type="hidden" name="ID" value="<?php echo $id; ?>">
             <button class="verstuur" type="submit" name="submit">verstuur</button>
         </forum>
     </head>
 </html>
 <?php
-$title = $_GET['Title'] ?? null;
-$alignment = $_GET['Alignment'] ?? null;
-$gender = $_GET['Gender'] ?? null;
-$height = $_GET['Height'] ?? null;
-$identity = $_GET['Identity'] ?? null;
-$maritalStatus = $_GET['MaritalStatus'] ?? null;
-$eyes = $_GET['Eyes'] ?? null;
-$hair = $_GET['Hair'] ?? null;
-$placeOfBirth = $_GET['PlaceOfBirth'] ?? null;
-$placeOfDeath = $_GET['PlaceOfDeath'] ?? null;
-$citizenship = $_GET['Citizenship'] ?? null;
+$title = $_POST['Title'] ?? null;
+$alignment = $_POST['Alignment'] ?? null;
+$gender = $_POST['Gender'] ?? null;
+$height = $_POST['Height'] ?? null;
+$identity = $_POST['Identity'] ?? null;
+$maritalstatus = $_POST['MaritalStatus'] ?? null;
+$eyes = $_POST['Eyes'] ?? null;
+$hair = $_POST['Hair'] ?? null;
+$placeofbirth = $_POST['PlaceOfBirth'] ?? null;
+$placeofdeath = $_POST['PlaceOfDeath'] ?? null;
+$citizenship = $_POST['Citizenship'] ?? null;
 $occupation = $_GET['Occupation'] ?? null;
 
 if($title != null){
-    $title_sql = "firstname = " . $title
+    $title_sql = "Title = " . $title;
+    $sql = "UPDATE superheroes SET :Title WHERE ID = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":Title", $title_sql );
+
+    $stmt->bindParam(":id", $id );
+
+    echo $sql;
+
+    $stmt->execute();
+} else{
+    echo "<br>title is niet gewijzigd.<br>";
 }
 
 if($alignment != null){
-    $alignment_sql = "firstname = " . $alignment
+    // $alignment_sql = "Alignment = " . $alignment;
+    $sql = "UPDATE superheroes SET Alignment = :Alignment WHERE ID = 1036";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(':Alignment', $alignment );
+
+    // $stmt->bindParam(":id", $id );
+    $stmt->debugDumpParams();
+    $stmt->execute();
+} else{
+    echo "alignment is niet gewijzigd.<br>";
 }
+
 
 if($gender != null){
-    $gender_sql = "firstname = " . $gender
+    $gender_sql = "Gender = " . $gender;
+    $sql = "UPDATE superheroes SET :Gender WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":Gender", $gender_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+} else{
+    echo "gender is niet gewijzigd.<br>";
 }
 
-if($title != null){
-    $title_sql = "firstname = " . $title
+
+if($height != null){
+    $height_sql = "Height = " . $height;
+    $sql = "UPDATE superheroes SET :Height WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":Height", $height_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+} else{
+    echo "height is niet gewijzigd.<br>";
 }
 
-if($title != null){
-    $title_sql = "firstname = " . $title
+
+if($identity != null){
+    $identity_sql = "Identity = " . $identity;
+    $sql = "UPDATE superheroes SET :Identitysql WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":Identitysql", $identity_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+} else{
+    echo "identity is niet gewijzigd.<br>";
 }
 
-if($title != null){
-    $title_sql = "firstname = " . $title
+
+if($maritalstatus != null){
+    $maritalstatus_sql = "MaritalStatus = " . $maritalstatus;
+    $sql = "UPDATE superheroes SET :MaritalStatus WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":MaritalStatus", $maritalstatus_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+} else{
+    echo "maritalstatus is niet gewijzigd.<br>";
 }
 
-if($title != null){
-    $title_sql = "firstname = " . $title
+
+if($eyes != null){
+    $eyes_sql = "Eyes = " . $eyes;
+    $sql = "UPDATE superheroes SET :Eyes WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":Eyes", $eyes_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+} else{
+    echo "eyes is niet gewijzigd.<br>";
 }
 
-if($title != null){
-    $title_sql = "firstname = " . $title
+
+if($hair != null){
+    $hair_sql = "Hair = " . $hair;
+    $sql = "UPDATE superheroes SET :Hair WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":Hair", $hair_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+} else{
+    echo "hair is niet gewijzigd.<br>";
 }
 
-if($title != null){
-    $title_sql = "firstname = " . $title
+
+if($placeofbirth != null){
+    $placeofbirth_sql = "PlaceOfBirth = " . $placeofbirth;
+    $sql = "UPDATE superheroes SET :Hair WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":PlaceOfBirth", $placeofbirth_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+} else{
+    echo "placeofbirth is niet gewijzigd.<br>";
 }
 
-if($title != null){
-    $title_sql = "firstname = " . $title
+
+if($placeofdeath != null){
+    $placeofdeath_sql = "PlaceOfDeath = " . $placeofdeath;
+    $sql = "UPDATE superheroes SET :PlaceOfDeath WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":PlaceOfDeath", $placeofdeath_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+} else{
+    echo "placeofdeath is niet gewijzigd.<br>";
 }
 
-if($title != null){
-    $title_sql = "firstname = " . $title
+
+if($citizenship != null){
+    $Citizenship_sql = "Citizenship = " . $citizenship;
+    $sql = "UPDATE superheroes SET :Citizenship WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":Citizenship", $Citizenship_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+    
+} else{
+    echo "citizenship is niet gewijzigd.<br>";
 }
 
-if($title != null){
-    $title_sql = "firstname = " . $title
+
+if($occupation != null){
+    $occupation_sql = "Occupation = " . $occupation;
+    $sql = "UPDATE superheroes SET :Occupation WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(":Occupation", $occupation_sql );
+
+    $stmt->bindParam(":id", $id );
+    $stmt->execute();
+} else{
+    echo "occupation is niet gewijzigd.<br>";
 }
 
-$sql = "UPDATE users SET firstname = :ph_firstname WHERE id = :id";
-$stmt = $db_conn->prepare($sql);
 
-$stmt->bindParam(":firstname", $form_firstname );
 
-$stmt->bindParam(":id", $id );
-$stmt->execute();
 
 ?>

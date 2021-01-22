@@ -25,7 +25,7 @@ $DataInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
 $numeriek = 1;
 
 foreach($DataInfo as $info){  
-    echo "<tr><td>" . $numeriek . "</td><td>" . $info['Title'] . "</td><td>" . $info['Alignment'] . "</td><td><a href=superheroes_show.php?id=" . $info['ID'] . ">" . $info['ID'] . "</a></td></tr>";
+    echo "<tr><td>" . $numeriek . "</td><td>" . $info['Title'] . "</td><td>" . $info['Alignment'] . "</td><td><a href=show.php?id=" . $info['ID'] . ">" . $info['ID'] . "</a></td></tr>";
     $numeriek++;
 }
 

@@ -27,7 +27,7 @@
 <?php
 include "database.php";
 
-$id = $_GET['id'] ?? "";
+$id = $_GET['id'];
 
 $sql = "SELECT * FROM superheroes WHERE ID = :id";
 $statement = $conn->prepare($sql); 
@@ -96,14 +96,25 @@ if($title != null){
 
 if($alignment != null){
     // $alignment_sql = "Alignment = " . $alignment;
-    $sql = "UPDATE superheroes SET Alignment = :Alignment WHERE ID = 1036";
+    $sql = "UPDATE superheroes SET Alignment = :Alignment WHERE ID = :id";
     $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(':Alignment', $alignment );
+    $statement->bindParam(":id", $_GET['id']);
+
+    $stmt->bindParam(':Alignment', $alignment, PDO::PARAM_STR);
 
     // $stmt->bindParam(":id", $id );
     $stmt->debugDumpParams();
     $stmt->execute();
+
+
+
+    // $sql = "SELECT * FROM gebruikers WHERE id =:id";
+    // $statement = $db_conn->prepare($sql); 
+    // $statement->bindParam(":id", $_GET['id']);
+    // $statement->execute();
+    // $database_gegevens = $statement->fetch(PDO::FETCH_ASSOC);
+
 } else{
     echo "alignment is niet gewijzigd.<br>";
 }

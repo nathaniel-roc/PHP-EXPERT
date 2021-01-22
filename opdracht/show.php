@@ -27,7 +27,7 @@
 <?php
 include "database.php";
 
-$id = $_GET['id'];
+$id = $_GET['id'] ?? null;
 
 $sql = "SELECT * FROM superheroes WHERE ID = :id";
 $statement = $conn->prepare($sql); 
@@ -44,10 +44,19 @@ foreach($DataInfo as $info){
                 </tr>
             </tbody>
         </table>
+        <button id='terug'>terug</button>
         <button id='wijzigen'>wijzigen</button>
+        <button id='verwijderen'>verwijderen</button>
         <script type="text/javascript">
+                    document.getElementById('terug').onclick = function () {
+                    location.href = 'index.php';
+                };
                     document.getElementById('wijzigen').onclick = function () {
-                    location.href = 'superheros_edit.php?id=<?php
+                    location.href = 'edit.php?id=<?php
+                    echo $id;?>';
+                };
+                    document.getElementById('verwijderen').onclick = function () {
+                    location.href = 'delete.php?id=<?php
                     echo $id;?>';
                 };
         </script>

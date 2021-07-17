@@ -1,3 +1,13 @@
+
+<?php
+include 'database.php';
+
+$sql = "SELECT Title, Alignment, ID FROM superheroes";
+$statement = $conn->prepare($sql); 
+$statement->execute();
+$dataInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 <html>
     <head>
         <title>Database</title>
@@ -5,6 +15,7 @@
     </head>
     <body>
         <table>
+
             <thead>
                 <tr>
                     <th>numeriek</th>
@@ -14,24 +25,27 @@
                 </tr>
             </thead>
             <tbody>
-<?php
-include 'database.php';
+                <?php foreach($dataInfo as $numeriek => $info):?>
+                    <tr>
+                        <td>
+                            <?php echo $numeriek +1 ?>
+                        </td>
+                        <td>
+                            <?php echo $info['Title']?>
+                        </td>
+                        <td>
+                            <?php echo $info['Alignment']?>
+                        </td>
+                        <td>
+                            <a href="show.php?id=<?php echo $info['ID']?>"><?php echo $info['ID']?></a>
+                        </td>
+                    </tr>
 
-$sql = "SELECT Title, Alignment, ID FROM superheroes";
-$statement = $conn->prepare($sql); 
-$statement->execute();
-$DataInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
+                <?php 
+                  $numeriek++;
+                endforeach; ?>
 
-$numeriek = 1;
-
-foreach($DataInfo as $info){  
-    echo "<tr><td>" . $numeriek . "</td><td>" . $info['Title'] . "</td><td>" . $info['Alignment'] . "</td><td><a href=show.php?id=" . $info['ID'] . ">" . $info['ID'] . "</a></td></tr>";
-    $numeriek++;
-}
-
-?>
-                </tr>
             </tbody>
         </table>
     </head>
-</html>
+</html> 
